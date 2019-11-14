@@ -1,5 +1,8 @@
-CREATE TABLE users
-(
+drop database if exists twitter;
+create database twitter;
+use twitter;
+
+create table users(
   userName varchar (255) NOT NULL,
   userPassword varchar (255) NOT NULL,
   userEmail varchar (255) UNIQUE NOT NULL,
