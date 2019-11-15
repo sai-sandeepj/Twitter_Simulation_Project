@@ -2,6 +2,8 @@ drop database if exists twitter;
 create database twitter;
 use twitter;
 
+//DDL
+
 create table users(
   userName varchar (255) NOT NULL,
   userPassword varchar (255) NOT NULL,
@@ -17,3 +19,9 @@ create table users(
   userPhone varchar (255) DEFAULT NULL,
   PRIMARY KEY(userName)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+//DML
+
+INSERT INTO users (userName, userPassword, userEmail, firstName, lastName, gender, aboutMe, userImage, 
+city, state, zipCode, userPhone) values ('test', '12345678', 'test@gmail.com', 'fname', 'lname', 'male', 
+'good', 'image', 'san jose', 'california', '95112', '987678908');
