@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-
-import SidePanel from "../components/SidePanel";
+import Home from './Home/Home'
+import SidePanel from "./SidePanel/SidePanel";
 
 class MainRoutes extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/" component={SidePanel} />
+        <Route path="/" component={SidePanel} />
+        <Route path="/user/home" component={Home} />
+
       </div>
     );
   }

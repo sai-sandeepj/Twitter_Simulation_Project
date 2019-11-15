@@ -1,0 +1,14 @@
+#right-component{
+    margin-top: 120px;
+    
+}
+
+#searchbar{
+    float:left;
+    border-radius: 20px 20px 20px 20px;
+    width: 84%;
+}
+
+#search-button{
+    border-radius: 20px 20px 20px 20px;
+}

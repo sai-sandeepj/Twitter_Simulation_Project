@@ -1,0 +1,28 @@
+#images-upload{
+    float: left;
+    color:#5c99fa; 
+    font-size: large;
+    margin-left: 30px;
+    padding-top: 0px;    margin-bottom: 0px;
+
+}
+
+.new-tweet{
+    margin-top: 100px;
+}
+
+#new-tweet-form-group{
+    margin-bottom: 0px;
+}
+
+#tweet-button{
+    border-radius: 20px 20px 20px 20px;
+    float:left;
+    margin-top: 0px;
+    margin-left: 400px;
+}
+
+#textarea-newtweet{
+    width: 100%;
+    border-radius: 20px 20px 20px 20px;
+}

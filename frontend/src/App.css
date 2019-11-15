@@ -21,7 +21,22 @@
   color: #09d3ac;
 }
 
-#twitterlogo {
-  height: 50px;
-  width: 50px;
+
+#left {
+    float:left;
+    width: 20%;
+    padding-left: 15px;
+    text-align: center;
+    /* margin-right: 5%; */
+}
+
+#center {
+    float:left;
+    width: 50%;
+}
+
+#right {
+    float:left;
+    width: 25%;
+    margin-left:50px;
 }

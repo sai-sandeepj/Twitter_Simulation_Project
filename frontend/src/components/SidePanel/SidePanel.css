@@ -1,0 +1,24 @@
+.sidepanel{
+    margin-left:10%;
+}
+
+#twitterlogo {
+  height: 50px;
+  width: 50px;
+  float: left;
+}
+
+
+
+a {
+    color: #000000;
+    text-decoration: none;
+    padding: 10px;
+}
+
+a:hover 
+{
+     color:#5c99fa; 
+     text-decoration:none; 
+     cursor:pointer;  
+}
