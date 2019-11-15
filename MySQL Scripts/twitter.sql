@@ -13,7 +13,7 @@ create table users(
   userImage varchar (255) DEFAULT NULL,
   city varchar (255) NOT NULL,
   state varchar (255) NOT NULL,
-  zipCode varchar (255) NOT NULL,
+  zipCode int (6) NOT NULL,
   userPhone int (10) DEFAULT NULL,
   PRIMARY KEY(userName)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
