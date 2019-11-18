@@ -12,7 +12,7 @@ library.add(
 
 class UserActions extends Component {
 
-    likeTweet =() => {
+    likeTweet = () => {
         console.log('in like tweet method');
     }
 
@@ -25,7 +25,7 @@ class UserActions extends Component {
     }
 
     render() {
-        
+
         let { retweets, liked, bookmarked, following } = this.props.userData
 
         let likes = liked.includes(this.props.tweetData.id) ? '-danger' : ''
