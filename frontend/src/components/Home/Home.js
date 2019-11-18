@@ -20,7 +20,7 @@ class Home extends Component {
                     <NewTweet />
                     <TweetHome />
                 </div>
-                <div className = 'd-none d-md-block d-print-block col-md-3 col-lg-3 col-xl-4'>
+                <div className='d-none d-md-block d-print-block col-md-3 col-lg-3 col-xl-4'>
                     <Search />
                 </div>
             </div>
