@@ -42,11 +42,11 @@ class UserActions extends Component {
         retweetId = 'user-actions-icon-retweet' + retweetId
 
         return (
-            <div>
-                <div id="tweet-icons"><button className='' id='user-actions-icon-comment'><FontAwesomeIcon icon={faComment} /></button></div>
-                <div id="tweet-icons"><Link onClick={() => this.retweetATweet()}><button className='' id={retweetId}><FontAwesomeIcon icon={faRetweet} /></button></Link></div>
-                <div id="tweet-icons"><Link onClick={() => this.likeTweet()}><button className='' id={likeid} ><FontAwesomeIcon icon={faHeart} /></button> </Link></div>
-                <div id="tweet-icons"><Link onClick={() => this.BookmarkTweet()}><button className=' ' id='user-actions-icon-bookmark'><FontAwesomeIcon icon={bookmarkedIcon} /></button></Link></div>
+            <div className = 'row'>
+                <div className='col-3'><button id='user-actions-icon-comment'><FontAwesomeIcon icon={faComment} /></button></div>
+                <div className='col-3'><Link onClick={() => this.retweetATweet()}><button className='' id={retweetId}><FontAwesomeIcon icon={faRetweet} /></button></Link></div>
+                <div className='col-3'><Link onClick={() => this.likeTweet()}><button className='' id={likeid} ><FontAwesomeIcon icon={faHeart} /></button> </Link></div>
+                <div className='col-3'><Link onClick={() => this.BookmarkTweet()}><button className=' ' id='user-actions-icon-bookmark'><FontAwesomeIcon icon={bookmarkedIcon} /></button></Link></div>
             </div>
         );
     }

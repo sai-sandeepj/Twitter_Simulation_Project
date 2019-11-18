@@ -13,15 +13,12 @@
     border-radius: 20px 20px 0px 0px;
 }
 
-#new-tweet-form-group{
-    margin-bottom: 30px;
-}
-
 #tweet-button{
     border-radius: 20px 20px 20px 20px;
     float:left;
     margin-top: 5px;
-    margin-left: 440px;
+    margin-left: 20%;
+    margin-bottom: 0px;
 }
 
 #textarea-newtweet{

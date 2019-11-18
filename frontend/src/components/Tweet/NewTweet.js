@@ -17,7 +17,7 @@ class NewTweet extends Component {
     state = {}
     render() {
         return (
-            <div className='card new-tweet'>
+            <div className='card row new-tweet'>
                 <form>
                     <div className="form-group" id='new-tweet-form-group' >
                         <textarea className="form-control" rows='3' id='textarea-newtweet' placeholder='Whats Happening?' pattern="{1,280}"></textarea>

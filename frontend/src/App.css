@@ -24,7 +24,6 @@
 
 #left {
     float:left;
-    width: 20%;
     padding-left: 15px;
     text-align: center;
     /* margin-right: 5%; */
@@ -32,11 +31,4 @@
 
 #center {
     float:left;
-    width: 40%;
-}
-
-#right {
-    float:left;
-    width: 25%;
-    margin-left:50px;
 }

@@ -9,11 +9,11 @@ class Search extends Component {
     state = {}
     render() {
         return (
-            <div id = 'right'>
+            <div>
                 <div id='right-component'>
                     <form className="form-inline">
-                        <input className='form-control' type='search' id='searchbar' placeholder='Search'></input>
-                        <button className="btn btn-primary" id='search-button' type="submit"><FontAwesomeIcon icon={faSearch}/></button>
+                        <input className='form-control col-8 col-md-10 col-lg-8' type='search' id='searchbar' placeholder='Search'></input>
+                        <button className="btn btn-primary col-2" id='search-button' type="submit"><FontAwesomeIcon icon={faSearch}/></button>
                     </form>
                 </div>
             </div>

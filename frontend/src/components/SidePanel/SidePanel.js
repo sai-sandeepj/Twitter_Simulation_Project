@@ -18,17 +18,24 @@ library.add(
 class SidePanel extends Component {
   render() {
     return (
-      <div className= 'sidepanel'>
+      <div>
         <div></div>
         <div className="list-group" id="left">
           <a href="/user/home"> <img id="twitterlogo" alt="" src={Twitterlogo} /> </a>
-          <a href='/user/home' className="font-weight-bold text-left"> <h4><FontAwesomeIcon icon={faHome} /> &nbsp; &nbsp;Home</h4></a>
-          <a href='/user/home' className=" font-weight-bold text-left"><h4><FontAwesomeIcon icon={faEnvelope} /> &nbsp; &nbsp;Messages</h4></a>
-          <a href='/user/home' className=" font-weight-bold text-left"><h4><FontAwesomeIcon icon={faBars} /> &nbsp; &nbsp; Lists</h4></a>
-          <a href='/user/home' className=" font-weight-bold text-left"><h4><FontAwesomeIcon icon={faBookmark} /> &nbsp; &nbsp; Bookmarks</h4></a>
-          <a href='/user/home' className=" font-weight-bold text-left"><h4><FontAwesomeIcon icon={faUserCircle} /> &nbsp; &nbsp;Profile</h4></a>
-          <a href='/user/home' className=" font-weight-bold text-left"><h4><FontAwesomeIcon icon={faChartBar} /> &nbsp; &nbsp;Analytics</h4></a>
-          <a href='/user/home' className=" font-weight-bold text-left"><h4><FontAwesomeIcon icon={faSignOutAlt} /> &nbsp; &nbsp;Logout</h4></a>
+
+          <a href='/user/home'> <h5 id="stayleft"><FontAwesomeIcon icon={faHome} /> &nbsp; &nbsp;</h5><h5 className='d-none d-lg-block d-print-block' id="stayleftall">Home</h5></a>
+
+          <a href='/user/home'><h5 id="stayleft"><FontAwesomeIcon icon={faEnvelope} /> &nbsp; &nbsp;</h5><h5 className='d-none d-lg-block d-print-block' id="stayleftall">Messages</h5></a>
+
+          <a href='/user/home'><h5 id="stayleft"><FontAwesomeIcon icon={faBars} /> &nbsp;&nbsp; &nbsp;</h5> <h5 className='d-none d-lg-block d-print-block' id="stayleftall">Lists</h5></a>
+
+          <a href='/user/home'><h5 id="stayleft"><FontAwesomeIcon icon={faBookmark} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5><h5 className='d-none d-lg-block d-print-block' id="stayleftall">Bookmark</h5></a>
+
+          <a href='/user/home'><h5 id="stayleft"><FontAwesomeIcon icon={faUserCircle} /> &nbsp; &nbsp; </h5><h5 className='d-none d-lg-block d-print-block' id="stayleftall">Profile</h5></a>
+
+          <a href='/user/home'><h5 id="stayleft"><FontAwesomeIcon icon={faChartBar} /> &nbsp; &nbsp; </h5> <h5 className='d-none d-lg-block d-print-block' id="stayleftall">Analytics</h5></a>
+
+          <a href='/user/home'><h5 id="stayleft" ><FontAwesomeIcon icon={faSignOutAlt} /> &nbsp; &nbsp;</h5><h5 className='d-none d-lg-block d-print-block' id="stayleftall">Logout</h5></a>
         </div>
       </div>
     )

@@ -1,5 +1,5 @@
-.sidepanel{
-    margin-left:10%;
+#sidepanel{
+    /* margin-left:5%; */
 }
 
 #twitterlogo {
@@ -8,7 +8,14 @@
   float: left;
 }
 
+#stayleft{
+  float: left;
+  left: 0px;
+}
 
+#stayleftall{
+  float: left;
+}
 
 a {
     color: #000000;
