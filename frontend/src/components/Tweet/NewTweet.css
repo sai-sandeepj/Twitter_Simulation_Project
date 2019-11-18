@@ -3,23 +3,25 @@
     color:#5c99fa; 
     font-size: large;
     margin-left: 30px;
-    padding-top: 0px;    margin-bottom: 0px;
-
+    padding-top: 0px;
+    margin-bottom: 0px;
 }
 
 .new-tweet{
-    margin-top: 100px;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    border-radius: 20px 20px 0px 0px;
 }
 
 #new-tweet-form-group{
-    margin-bottom: 0px;
+    margin-bottom: 30px;
 }
 
 #tweet-button{
     border-radius: 20px 20px 20px 20px;
     float:left;
-    margin-top: 0px;
-    margin-left: 400px;
+    margin-top: 5px;
+    margin-left: 440px;
 }
 
 #textarea-newtweet{

@@ -8,9 +8,9 @@ class Home extends Component {
     state = {}
     render() {
         return (
-            <div className='container' data-spy="scroll">
+            <div data-spy="scroll">
                 <div id='center'>
-                    <NewTweet /><br />
+                    <NewTweet />
                     <TweetHome/>
                 </div>
                 <Search />

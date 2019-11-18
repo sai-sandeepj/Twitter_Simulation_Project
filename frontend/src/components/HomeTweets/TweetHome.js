@@ -8,12 +8,13 @@ class Tweets extends Component {
     constructor() {
         super()
         this.state = {
+            
             Tweets: [
                 {
                     id: '1',
                     userName: 'User1',
                     FullName: 'Userone',
-                    TweetMessage: 'This is tweet message. This is tweet message This is tweet message This is tweet message This is tweet message'
+                    TweetMessage: 'This is tweet message. This is tweet message This is tweet message This is tweet message This is tweet message. This is tweet message. This is tweet message This is tweet message This is tweet message This is tweet message'
                 },
                 {
                     id: '2',
@@ -45,12 +46,12 @@ class Tweets extends Component {
     render() {
 
         let tweet = ""
-        tweet = this.state.Tweets.map((tweet, index) => {
+        tweet = this.state.Tweets.map((tweet,index) => {
             return (
                 <Tweet
                     key={index}
                     tweetIndividual={tweet}
-                    // visitTweet={this.visitTweeet.bind(this)}
+                // visitTweet={this.visitTweeet.bind(this)}
                 />
             )
         })

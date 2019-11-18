@@ -21,7 +21,7 @@ class SidePanel extends Component {
       <div className= 'sidepanel'>
         <div></div>
         <div className="list-group" id="left">
-          <a href="/user/home"> <img id="twitterlogo" alt="" src={Twitterlogo} /> </a><br />
+          <a href="/user/home"> <img id="twitterlogo" alt="" src={Twitterlogo} /> </a>
           <a href='/user/home' className="font-weight-bold text-left"> <h4><FontAwesomeIcon icon={faHome} /> &nbsp; &nbsp;Home</h4></a>
           <a href='/user/home' className=" font-weight-bold text-left"><h4><FontAwesomeIcon icon={faEnvelope} /> &nbsp; &nbsp;Messages</h4></a>
           <a href='/user/home' className=" font-weight-bold text-left"><h4><FontAwesomeIcon icon={faBars} /> &nbsp; &nbsp; Lists</h4></a>
