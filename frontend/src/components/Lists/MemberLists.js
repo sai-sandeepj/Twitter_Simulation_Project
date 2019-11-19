@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Search from '../Search/Search'
-import SidePanel from '../SidePanel/SidePanel'
+import Search from '../Search/Search';
+import SidePanel from '../SidePanel/SidePanel';
+import ListNav from './ListNav';
 
 class Home extends Component {
-    state = {}
     render() {
         return (
             <div class='row'>
@@ -14,18 +14,9 @@ class Home extends Component {
                     <SidePanel />
                 </div>
                 <div className='col-8 col-sm-8 col-md-7 col-lg-5 col-xl-5' id='center'>
-                    <div className='row '>
-                        <div className='col-2 text-left' >
-                            <h4 className='font-weight-bold'>Bookmarks</h4>
-                            <h7 className='text-secondary'>@test_username</h7>
-                        </div>
-                        {/* <div className='col-10 float-right'>
-                            <a href='/lists/create'><h6 className="float-right">Clear all Bookmarks</h6> </a>
-                        </div> */}
-                    </div>
-                    <br />
+                    <ListNav />
                     <div className='row float-left'>
-                        Bookmarks
+                        Member Lists
                     </div>
                 </div>
                 <div className='d-none d-md-block d-print-block col-md-3 col-lg-3 col-xl-4'>

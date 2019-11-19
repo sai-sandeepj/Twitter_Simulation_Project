@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import default_avatar from "../../images/default_avatar.png";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import Search from '../Search/Search'
+import SidePanel from '../SidePanel/SidePanel'
 
 const zipRegEx = /^[0-9]{5}(?:-[0-9]{4})?$/
 const UNRegEx = /^[a-zA-Z0-9_]{1,15}$/
@@ -34,8 +36,14 @@ const SignUpSchema = Yup.object().shape({
 class Profile extends Component {
     render() {
         return (
-            <div className="container-fluid">
-                <div className="card-fluid shadow-sm p-3 mb-5 rounded text-left">
+            <div class='row'>
+                <div className='col-sm-none col-md-1 col-lg-1 col-xl-1'>
+
+                </div>
+                <div className=' col-2 col-sm-2 col-md-1 col-lg-3 col-xl-2' >
+                    <SidePanel />
+                </div>
+                <div className=" col-8 col-sm-8 col-md-7 col-lg-5 col-xl-5 card-fluid shadow-sm p-3 mb-5 rounded text-left" id='center'>
                     <span className="font-weight-bold">Your account</span>
                     &nbsp;&nbsp;&nbsp;
                     <a className="nav-link-inline" id="btn-edit" href="/profile" onClick={this.editProfile}>Edit</a>
@@ -286,6 +294,9 @@ class Profile extends Component {
                             </Form>
                         )}
                     </Formik>
+                </div>
+                <div className='d-none d-md-block d-print-block col-md-3 col-lg-3 col-xl-4'>
+                    <Search />
                 </div>
             </div>
         )

@@ -42,7 +42,7 @@ class SignUp extends Component {
                         <div className="col-md-4 mx-auto">
                             <div className="card shadow p-3 mb-5 rounded">
                                 <div className="card-body">
-                                    <img id="twitterlogo" alt="" src={twitterlogo} />
+                                    <img id="twitterlogo" alt="" src={twitterlogo} /> &nbsp;
                                     <h4 className="text-black text-left font-weight-bold">Create your account!</h4>
                                     <br />
                                     <Formik
