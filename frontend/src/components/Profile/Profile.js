@@ -36,7 +36,7 @@ const SignUpSchema = Yup.object().shape({
 class Profile extends Component {
     render() {
         return (
-            <div class='row'>
+            <div className='row'>
                 <div className='col-sm-none col-md-1 col-lg-1 col-xl-1'>
 
                 </div>

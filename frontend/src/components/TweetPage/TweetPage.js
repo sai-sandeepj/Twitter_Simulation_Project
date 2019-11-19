@@ -14,7 +14,15 @@ class Home extends Component {
                     <SidePanel />
                 </div>
                 <div className='col-8 col-sm-8 col-md-7 col-lg-5 col-xl-5' id='center'>
-                    Messages
+                    <div className='row '>
+                        <div className='col-2 text-left' >
+                            <h4 className='font-weight-bold'>Tweet</h4>
+                        </div>
+                    </div>
+                    <br />
+                    <div className='row float-left'>
+                        Tweet and commments
+                    </div>
                 </div>
                 <div className='d-none d-md-block d-print-block col-md-3 col-lg-3 col-xl-4'>
                     <Search />

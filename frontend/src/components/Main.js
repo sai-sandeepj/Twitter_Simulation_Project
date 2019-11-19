@@ -11,6 +11,7 @@ import Analytics from './Analytics/Analytics';
 import MemberLists from './Lists/MemberLists';
 import SubscriptionLists from './Lists/SubscribedLists';
 import OwnedLists from './Lists/OwnedLists';
+import TweetPage from './TweetPage/TweetPage';
 
 class MainRoutes extends Component {
   render() {
@@ -27,6 +28,7 @@ class MainRoutes extends Component {
         <Route path='/user/lists/owned' component={OwnedLists} />
         <Route path='/user/lists/subscriptions' component={SubscriptionLists} />
         <Route path='/user/lists/memberships' component={MemberLists} />
+        <Route path='/username/tweetid' component={TweetPage} />
       </div>
     );
   }

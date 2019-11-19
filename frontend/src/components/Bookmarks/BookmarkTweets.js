@@ -6,7 +6,7 @@ class Home extends Component {
     state = {}
     render() {
         return (
-            <div class='row'>
+            <div className='row'>
                 <div className='col-sm-none col-md-1 col-lg-1 col-xl-1'>
 
                 </div>
@@ -17,7 +17,7 @@ class Home extends Component {
                     <div className='row '>
                         <div className='col-2 text-left' >
                             <h4 className='font-weight-bold'>Bookmarks</h4>
-                            <h7 className='text-secondary'>@test_username</h7>
+                            <h6 className='text-secondary'>@test_username</h6>
                         </div>
                         {/* <div className='col-10 float-right'>
                             <a href='/lists/create'><h6 className="float-right">Clear all Bookmarks</h6> </a>
