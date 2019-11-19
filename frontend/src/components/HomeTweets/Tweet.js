@@ -69,6 +69,10 @@ class Tweet extends Component {
         }
     }
 
+    componentDidMount = () => {
+        
+    }
+ 
     render() {
 
         return (
@@ -78,8 +82,8 @@ class Tweet extends Component {
                         <div id='visit-tweet-card'>
                             <div className='col-2' id='user-image' ><img src={UserImage} alt='logo' /></div>
                             <div className='col-10' id='user-tweet-message'>
-                                <Link to='/user/username'><p className="font-weight-bold" id='tweet-fullname'>{this.props.tweetIndividual.userName}</p></Link>
-                                <p id='tweet-username'>@{this.props.tweetIndividual.FullName}</p><br />
+                                <Link to='/user/username'><p className="font-weight-bold" id='tweet-fullname'>{this.props.tweetIndividual.FullName}</p></Link>
+                                <p id='tweet-username'>@{this.props.tweetIndividual.userName}</p><br />
                                 <p id='tweet-username'>{this.props.tweetIndividual.TweetMessage}</p><br />
                                 <UserActions userData={this.state.user} tweetData={this.props.tweetIndividual} />
                             </div>

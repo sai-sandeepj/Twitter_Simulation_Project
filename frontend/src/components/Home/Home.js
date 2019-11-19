@@ -7,6 +7,9 @@ import SidePanel from '../SidePanel/SidePanel'
 
 class Home extends Component {
     state = {}
+    componentDidMount = () => {
+        
+    }
     render() {
         return (
             <div className='row'>
