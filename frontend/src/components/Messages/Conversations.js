@@ -21,7 +21,7 @@ class Conversations extends Component {
                     <div className='col-5 col-md-5 col-lg-4 col-xl-4'>
                         Conversations
                 </div>
-                    <div className='col-7 col-md-7 col-lg-8 col-xl-8'>
+                    <div className='col-7 col-md-7 col-lg-6 col-xl-6'>
                         <UserMessages />
                     </div>
 
