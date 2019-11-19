@@ -12,12 +12,12 @@ app.use(cookieParser());
 
 const signUp = require("./routes/signUp");
 const getUserTweets = require("./routes/getUserTweets");
-const tweets = require("./routes/tweets");
+const addNewTweet = require("./routes/addNewTweet");
 
 //ownerSignup
 app.use("/", signUp);
 app.use("/", getUserTweets);
-app.use("/", tweets);
+app.use("/", addNewTweet);
 
 app.listen(3001, () => {
   console.log("server is running on port 3001");
