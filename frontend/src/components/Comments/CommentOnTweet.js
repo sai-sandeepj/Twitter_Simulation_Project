@@ -29,7 +29,7 @@ class CommentOnTweet extends Component {
                                 <div className="card row" id='commentingTweet'>
                                     <Link to='/username/tweetid'>
                                         <div id='visit-tweet-card'>
-                                            <div className='col-2' id='user-image' ><img src={UserImage} alt='logo' /></div>
+                                            <div className='col-1' id='user-image' ><img src={UserImage} alt='logo' /></div>
                                             <div className='col-10' id='user-tweet-message'>
                                                 <Link to='/user/username'><p className="font-weight-bold" id='tweet-fullname'>{this.props.tweetData.userName}</p></Link>
                                                 <p id='tweet-username'>@{this.props.tweetData.FullName}</p><br />

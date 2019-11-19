@@ -24,7 +24,7 @@ class RetweetWithCommentModal extends Component {
                 <Modal isOpen={this.props.modal} toggle={() => this.props.toggle()} className='modal-popup' scrollable>
                     <ModalHeader toggle={() => this.props.toggle()} close={closeBtn}></ModalHeader>
                     <ModalBody className="modal-body row">
-                        <div className='col-2' id='user-image' ><img src={UserImage} alt='logo' /></div>
+                        <div className='col-1' id='user-image' ><img src={UserImage} alt='logo' /></div>
                         <div className="form-group col-10" >
                             <form>
                                 <textarea className="form-control" rows='3' id='textarea-newtweet' placeholder='comments' pattern="{1,280}"></textarea>

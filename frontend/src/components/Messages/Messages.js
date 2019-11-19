@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Search from '../Search/Search'
 import SidePanel from '../SidePanel/SidePanel'
 import Conversations from './Conversations'
 import './MessagesStyling.css'

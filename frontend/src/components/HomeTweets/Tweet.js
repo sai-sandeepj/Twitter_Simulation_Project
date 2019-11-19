@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import UserImage from '../../images/user-icon.png'
 import UserActions from './UserActions'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
+
+library.add(
+    faChevronDown
+)
 class Tweet extends Component {
     constructor() {
         super()
@@ -68,11 +75,11 @@ class Tweet extends Component {
             <div>
                 <div className="card row">
                     <Link to='/username/tweetid'>
-                        <div  id='visit-tweet-card'>
+                        <div id='visit-tweet-card'>
                             <div className='col-2' id='user-image' ><img src={UserImage} alt='logo' /></div>
                             <div className='col-10' id='user-tweet-message'>
                                 <Link to='/user/username'><p className="font-weight-bold" id='tweet-fullname'>{this.props.tweetIndividual.userName}</p></Link>
-                                <p  id='tweet-username'>@{this.props.tweetIndividual.FullName}</p><br />
+                                <p id='tweet-username'>@{this.props.tweetIndividual.FullName}</p><br />
                                 <p id='tweet-username'>{this.props.tweetIndividual.TweetMessage}</p><br />
                                 <UserActions userData={this.state.user} tweetData={this.props.tweetIndividual} />
                             </div>
