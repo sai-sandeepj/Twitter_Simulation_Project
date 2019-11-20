@@ -72,7 +72,7 @@ class UserActions extends Component {
         return (
             <div className='row'>
                 <div className='col-3'><Link onClick={() => this.showCommentModal()}><button id='user-actions-icon-comment'><FontAwesomeIcon icon={faComment} /></button></Link></div>
-                <div className='col-3'>
+                <div className='col-3' id = 'user-retweet-option'>
                     <Dropdown>
                         <Link>
                             <Dropdown.Toggle id={retweetId} >

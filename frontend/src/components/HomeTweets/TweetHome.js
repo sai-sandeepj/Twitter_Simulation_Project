@@ -8,7 +8,7 @@ class Tweets extends Component {
     constructor() {
         super()
         this.state = {
-            
+
             Tweets: [
                 {
                     id: '1',
@@ -43,10 +43,43 @@ class Tweets extends Component {
             ]
         }
     }
+
+    componentDidMount = () => {
+        let userName = localStorage.getItem('userName')
+        const data = {
+            userName: userName
+        }
+        // axios.post(rootUrl + '/getAllTweetsFollowing', data)
+        //     .then(response => {
+        //         console.log('response data:', response.data)
+        //         if (response.status === 200) {
+
+        //             this.setState({
+        //                 Tweets: response.data
+        //             })
+        //         }
+        //         else {
+        //             console.log("Didn't fetch tweets data")
+        //         }
+        //     }).catch((err) => {
+        //         if (err) {
+        //             if (err.response.status === 406) {
+        //                 console.log("Error message", err.response.status);
+        //                 swal(err.response.data)
+        //             }
+        //             else {
+        //                 swal("Database connection failed. please try again later")
+        //             }
+        //         }
+
+        //     });
+    }
+
+
     render() {
 
         let tweet = ""
-        tweet = this.state.Tweets.map((tweet,index) => {
+        tweet = this.state.Tweets.map((tweet, index) => {
             return (
                 <Tweet
                     key={index}
