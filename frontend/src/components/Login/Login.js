@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import twitterhomepage from "../../images/twitterhomepage.png";
-// import { Redirect } from 'react-router';
+import { Redirect } from 'react-router';
+import axios from 'axios';
+import rootUrl from '../Config/Settings';
+import swal from "sweetalert";
 import twitterlogo from "../../images/twitterlogo.png";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -19,12 +22,53 @@ class Login extends Component {
         super(props);
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            authFlag: ""
         }
+        this.submitLogin = this.submitLogin.bind(this);
+    }
+
+    submitLogin = (details) => {
+        console.log();
+        const data = {
+            userEmail: details.email,
+            userPassword: details.password
+        }
+        //set the with credentials to true
+        axios.defaults.withCredentials = true;
+        //make a post request with the user data
+        axios.post(rootUrl + '/login', data)
+            .then(response => {
+                console.log("inside success")
+                console.log("Status Code : ", response.status);
+                if (response.status === 200) {
+                    console.log("response", response.data)
+                    localStorage.setItem("userName", response.data.userName)
+                    localStorage.setItem("userEmail", response.data.userEmail)
+                    this.setState({
+                        authFlag: true
+                    })
+                }
+                console.log(this.state.authFlag)
+            })
+            .catch(error => {
+                console.log("In error");
+                this.setState({
+                    authFlag: false
+                });
+                console.log(error);
+                swal("OOps...", "User credentials not valid.", "error");
+            })
+
     }
     render() {
+        let redirectVar = null;
+        if (localStorage.getItem('userName')) {
+            redirectVar = <Redirect to='/user/home' />
+        }
         return (
             <div className="container-fluid">
+                {redirectVar}
                 <div className="row align-items-center">
                     <div className="col-md-6-fluid">
                         <img className="img-responsive fit-image" alt="" src={twitterhomepage} />

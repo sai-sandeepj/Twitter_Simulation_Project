@@ -4,12 +4,18 @@ import Search from '../Search/Search'
 import './Home.css'
 import TweetHome from '../HomeTweets/TweetHome'
 import SidePanel from '../SidePanel/SidePanel'
+import { Redirect } from 'react-router'
 
 class Home extends Component {
     state = {}
     render() {
+        let redirectVar = null;
+        if (!localStorage.getItem('userName')) {
+            redirectVar = <Redirect to='/' />
+        }
         return (
             <div class='row'>
+                {redirectVar}
                 <div className='col-sm-none col-md-1 col-lg-1 col-xl-1'>
 
                 </div>

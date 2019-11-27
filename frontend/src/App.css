@@ -46,12 +46,42 @@
   height: 722px;   /* only if you want fixed height  */
 }
 
+#theader{
+  width: 650px;
+  object-fit: fill;
+  height: 200px; /* only if you want fixed height  */
+}
+
 #twitterbutton{
-  background-color: rgb(33, 145, 250)
+  background-color: rgb(43, 188, 255)
+}
+
+#editprofile{
+  color: rgb(43, 188, 255)
 }
 
 .profile-heading img{
   width: 100px;
   height: 100px;
   border-radius: 50%;
+}
+
+.picContainer{
+  position: absolute;
+    left: 10px;
+    top: 190px;
+    z-index: 2;
+}
+
+.profile-row{
+  padding-top: 25px;
+}
+
+#tloc{
+  width: 30px;
+  height: 30px;
+}
+
+#desc{
+  margin: 5px;
 }

@@ -4,9 +4,14 @@ import twitterlogo from "../../images/twitterlogo.png";
 import default_avatar from "../../images/default_avatar.png";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import swal from 'sweetalert';
+import rootUrl from "../Config/Settings";
+import { Redirect } from 'react-router';
 
 const zipRegEx = /^[0-9]{5}(?:-[0-9]{4})?$/
 const UNRegEx = /^[a-zA-Z0-9_]{1,15}$/
+const phoneRegExp = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
 
 const SignUpSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -19,8 +24,13 @@ const SignUpSchema = Yup.object().shape({
     password: Yup.string()
         .min(8, "Password must be 8 characters at minimum")
         .required("Password is required"),
+    gender: Yup.string()
+        .required("Gender is required"),
     description: Yup.string()
         .required("Description is required"),
+    userPhone: Yup.string()
+        .matches(phoneRegExp, 'Phone number is not valid')
+        .required("Phone number is required"),
     state: Yup.string()
         .required("State is required"),
     city: Yup.string()
@@ -34,9 +44,94 @@ const SignUpSchema = Yup.object().shape({
 });
 
 class SignUp extends Component {
+    constructor() {
+        super()
+        this.state = {
+            profileImage: "",
+            profileImagePreview: "",
+            authFlag: false
+        }
+        this.submitSignup = this.submitSignup.bind(this)
+    }
+
+    //handle change of profile image
+    handleChange = (e) => {
+        const target = e.target;
+        const name = target.name;
+        if (name === "ProfileImage") {
+            console.log(target.files);
+            var profilePhoto = target.files[0];
+            var data = new FormData();
+            data.append('photos', profilePhoto);
+            axios.defaults.withCredentials = true;
+            axios.post(rootUrl + '/upload-file', data)
+                .then(response => {
+                    if (response.status === 200) {
+                        console.log('Profile Photo Name: ', profilePhoto.name);
+                        this.setState({
+                            profileImage: profilePhoto.name,
+                            profileImagePreview: rootUrl + "/download-file/" + profilePhoto.name
+                        })
+                    }
+                })
+        }
+    }
+
+    submitSignup = (details) => {
+        console.log("Inside submit login", details);
+        const data = {
+            userName: details.userName,
+            userPassword: details.password,
+            userEmail: details.email,
+            firstName: details.firstName,
+            lastName: details.lastName,
+            gender: details.gender,
+            aboutMe: details.description,
+            city: details.city,
+            state: details.state,
+            zipCode: details.userZip,
+            userPhone: details.userPhone,
+            userImage: this.state.profileImage
+        }
+        //set the with credentials to true
+        axios.defaults.withCredentials = true;
+        //make a post request with the user data
+        axios.post(rootUrl + '/signUp', data)
+            .then(response => {
+                console.log("inside success")
+                console.log("Status Code : ", response.status);
+                if (response.status === 200) {
+                    this.setState({
+                        authFlag: true
+                    })
+                    // alert("Signup successfull! You can now login in to your account!")
+                    swal("Successful", "You can now login to your account!", "success");
+                }
+                console.log(this.state.authFlag)
+            })
+            .catch(error => {
+                console.log("In error");
+                this.setState({
+                    authFlag: false
+                });
+                swal("OOps...", "Something went wrong. Please try again!", "error");
+                console.log(error);
+            })
+    }
+
     render() {
+        let redirectVar = null;
+        if (this.state.authFlag === true) {
+            redirectVar = <Redirect to="/" />
+        }
+        console.log("profile image preview", this.state.profileImagePreview)
+        let profileImageData = <img src={default_avatar} alt="logo" />
+        if (this.state.profileImagePreview) {
+            profileImageData = <img src={this.state.profileImagePreview} alt="logo" />
+        }
         return (
             <div>
+                {redirectVar}
                 <div className="container-fluid" id="signup">
                     <div className="row align-items-center h-100 ">
                         <div className="col-md-4 mx-auto">
@@ -51,7 +146,9 @@ class SignUp extends Component {
                                             lastName: "",
                                             password: "",
                                             email: "",
+                                            gender: "",
                                             description: "",
+                                            userPhone: "",
                                             state: "",
                                             city: "",
                                             userZip: "",
@@ -65,7 +162,6 @@ class SignUp extends Component {
                                     >
                                         {({ touched, errors, isSubmitting }) => (
                                             <Form>
-
                                                 <div className="form-group text-left">
                                                     <label htmlFor="firstName">First Name</label>
                                                     <Field
@@ -129,6 +225,47 @@ class SignUp extends Component {
                                                     <ErrorMessage
                                                         component="div"
                                                         name="password"
+                                                        align="text-left"
+                                                        className="invalid-feedback"
+                                                    />
+                                                </div>
+
+                                                <div className="form-group text-left">
+                                                    <label htmlFor="gender">Gender</label> &nbsp;
+                                                    <Field
+                                                        name="gender"
+                                                        component="select"
+                                                        placeholder="Your Gender"
+                                                        className={`form-control ${
+                                                            touched.password && errors.password ? "is-invalid" : ""
+                                                            }`}
+                                                    >
+                                                        <option value="" label="Select your Gender" />
+                                                        <option value="male">Male</option>
+                                                        <option value="female">Female</option>
+
+                                                    </Field>
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="gender"
+                                                        className="invalid-feedback"
+                                                    />
+                                                </div>
+
+                                                <div className="form-group text-left">
+                                                    <label htmlFor="userPhone">Phone number</label>
+                                                    <Field
+                                                        type="text"
+                                                        name="userPhone"
+                                                        //   autofocus="true"
+                                                        className={`form-control ${
+                                                            touched.userPhone && errors.userPhone ? "is-invalid" : ""
+                                                            }`}
+                                                    />
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="userPhone"
+                                                        align="text-left"
                                                         className="invalid-feedback"
                                                     />
                                                 </div>
@@ -150,13 +287,15 @@ class SignUp extends Component {
                                                 </div>
 
                                                 <div className="form-group text-left">
-                                                    <select
-                                                        name="color"
-                                                        value=""
-                                                        style={{ display: 'block' }}
+                                                    <label htmlFor="state">State</label> &nbsp;
+                                                    <Field
+                                                        name="state"
+                                                        component="select"
+                                                        className={`form-control ${
+                                                            touched.state && errors.state ? "is-invalid" : ""
+                                                            }`}
                                                     >
                                                         <option value="" label="Select a State" />
-                                                        <option value="">N/A</option>
                                                         <option value="AK">Alaska</option>
                                                         <option value="AL">Alabama</option>
                                                         <option value="AR">Arkansas</option>
@@ -209,12 +348,12 @@ class SignUp extends Component {
                                                         <option value="WI">Wisconsin</option>
                                                         <option value="WV">West Virginia</option>
                                                         <option value="WY">Wyoming</option>
-                                                    </select>
-                                                    {errors.color &&
-                                                        touched.color &&
-                                                        <div className="input-feedback">
-                                                            {errors.color}
-                                                        </div>}
+                                                    </Field>
+                                                    <ErrorMessage
+                                                        component="div"
+                                                        name="state"
+                                                        className="invalid-feedback"
+                                                    />
                                                 </div>
 
                                                 <div className="form-group text-left">
@@ -274,7 +413,7 @@ class SignUp extends Component {
                                                     <input type="file" name="ProfileImage" id="ProfileImage" className="btn btn-sm photo-upload-btn" onChange={this.handleChange} />
                                                 </div>
                                                 <div className="align-items-right profile-heading">
-                                                    <img src={default_avatar} alt="logo" />
+                                                    {profileImageData}
                                                 </div>
                                                 <br />
                                                 <button
@@ -296,7 +435,7 @@ class SignUp extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 }

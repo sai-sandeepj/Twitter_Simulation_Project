@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarPlus } from '@fortawesome/free-regular-svg-icons'
+import { Redirect } from 'react-router'
 
 class Home extends Component {
     render() {
+        let redirectVar = null;
+        if (!localStorage.getItem('userName')) {
+            redirectVar = <Redirect to='/' />
+        }
         return (
             <div>
+                {redirectVar}
                 <div className='row '>
                     <div className='col-2 text-left' >
                         <h4 className='font-weight-bold'>Lists</h4>

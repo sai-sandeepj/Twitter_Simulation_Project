@@ -5,6 +5,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faBars, faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope, faBookmark, faChartBar } from '@fortawesome/free-regular-svg-icons'
+import { Redirect } from 'react-router';
 
 library.add(
   faHome,
@@ -16,9 +17,22 @@ library.add(
   faChartBar
 )
 class SidePanel extends Component {
+  constructor() {
+    super();
+    this.handleLogout = this.handleLogout.bind(this)
+  }
+
+  handleLogout = () => {
+    localStorage.clear();
+  }
   render() {
+    let redirectVar = null;
+    if (!localStorage.getItem('userName')) {
+      redirectVar = <Redirect to='/' />
+    }
     return (
       <div>
+        {redirectVar}
         <div></div>
         <div className="list-group" id="left">
           <a href="/user/home"> <img id="twitterlogo" alt="" src={Twitterlogo} /> </a>
@@ -35,7 +49,7 @@ class SidePanel extends Component {
 
           <a href='/user/analytics'><h5 id="stayleft"><FontAwesomeIcon icon={faChartBar} /> &nbsp; &nbsp; </h5> <h5 className='d-none d-lg-block d-print-block' id="stayleftall">Analytics</h5></a>
 
-          <a href='/logout'><h5 id="stayleft" ><FontAwesomeIcon icon={faSignOutAlt} /> &nbsp; &nbsp;</h5><h5 className='d-none d-lg-block d-print-block' id="stayleftall">Logout</h5></a>
+          <a href='/' onClick={this.handleLogout}><h5 id="stayleft" ><FontAwesomeIcon icon={faSignOutAlt} /> &nbsp; &nbsp;</h5><h5 className='d-none d-lg-block d-print-block' id="stayleftall">Logout</h5></a>
         </div>
       </div>
     )
