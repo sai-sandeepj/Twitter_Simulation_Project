@@ -3,6 +3,7 @@ const mongoPool = require("../configFiles/MongoConnectionPooling");
 const app = express.Router();
 
 const tweet = require("../model/tweets");
+var mongousers = require("../model/mongousers");
 
 app.post("/addNewTweet", async (req, res) => {
   console.log("In AddNewtweet POST");
@@ -17,7 +18,7 @@ app.post("/addNewTweet", async (req, res) => {
     // likes: {
     //   userName: {}
     // },
-    // comments: []
+    comments: []
     // retweetNoComment: {
     //   userName: {}
     // }

@@ -6,25 +6,29 @@ const app = express.Router();
 // const following = require("../model/followingSchema");
 const Musers = require("../model/Musers");
 var mongousers = require("../model/mongousers");
+const tweets = require("../model/tweets");
 
-app.post("/followUser", async (req, res) => {
-  console.log("In followUser POST");
+app.post("/bookmarkATweet", async (req, res) => {
+  console.log("In bookmarkATweet POST");
 
-  return await mongousers
-    .findOneAndUpdate(
-      { userName: req.body.userName },
-      { $push: { following: { userName: req.body.followUserName } } }
+  return await tweets
+    .findById(
+      req.body.tweetId
+      // { $push: { bookmarked: { tweetId: req.body.tweetId } } }
     )
     .then(async result => {
-      // function(err, result) {
-      //   if (result) {
-      console.log("follower added", result);
-      res.end("follower added", result);
+      console.log("tweet details", result);
+      res.status(200).end(JSON.stringify(result));
 
+      var bookmarked_tweet = {
+        _id: result._id
+        // userName: result.userName,
+        // firstName: result.firstName
+      };
       return await mongousers
         .findOneAndUpdate(
-          { userName: req.body.followUserName },
-          { $push: { followers: { userName: req.body.userName } } }
+          { userName: req.body.userName },
+          { $push: { bookmarked: bookmarked_tweet } }
         )
         .then(async result2 => {
           console.log("following added", result2);

@@ -8,14 +8,21 @@ import { Redirect } from 'react-router'
 
 class Home extends Component {
     state = {}
+    componentDidMount = () => {
+        
+    }
     render() {
         let redirectVar = null;
         if (!localStorage.getItem('userName')) {
             redirectVar = <Redirect to='/' />
         }
         return (
+<<<<<<< HEAD
             <div class='row'>
                 {redirectVar}
+=======
+            <div className='row'>
+>>>>>>> cb293a8e5eaf7f5ae131a4911c7270a6ed496151
                 <div className='col-sm-none col-md-1 col-lg-1 col-xl-1'>
 
                 </div>
@@ -23,6 +30,7 @@ class Home extends Component {
                     <SidePanel />
                 </div>
                 <div className='col-8 col-sm-8 col-md-7 col-lg-5 col-xl-5' id='center'>
+                    <h4 id = 'home-font-styling'>Home</h4>
                     <NewTweet />
                     <TweetHome />
                 </div>
