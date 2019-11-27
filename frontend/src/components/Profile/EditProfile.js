@@ -13,7 +13,7 @@ const zipRegEx = /^[0-9]{5}(?:-[0-9]{4})?$/
 const UNRegEx = /^[a-zA-Z0-9_]{1,15}$/
 const phoneRegExp = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
 
-const SignUpSchema = Yup.object().shape({
+const ProfileSchema = Yup.object().shape({
     firstName: Yup.string()
         .required("First name is required"),
     lastName: Yup.string()
@@ -27,7 +27,8 @@ const SignUpSchema = Yup.object().shape({
         .required("Description is required"),
     userPhone: Yup.string()
         .matches(phoneRegExp, 'Phone number is not valid')
-        .required("Phone number is required"),
+        .required("Phone number is required")
+        .nullable(),
     state: Yup.string()
         .required("State is required"),
     city: Yup.string()
@@ -45,17 +46,18 @@ class Home extends Component {
     constructor() {
         super()
         this.state = {
-            firstName: "test",
-            lastName: "test",
-            email: "test@test.com",
-            gender: "test",
-            description: "test",
-            userPhone: "9999999999",
-            state: "test",
-            city: "test",
-            userZip: "99999",
-            userName: "test"
+            firstName: "",
+            lastName: "",
+            email: "",
+            gender: "",
+            description: "",
+            userPhone: "",
+            state: "",
+            city: "",
+            userZip: "",
+            userName: ""
         }
+        this.handleChange = this.handleChange.bind(this)
     }
 
     componentDidMount() {
@@ -82,7 +84,8 @@ class Home extends Component {
                         state: response.data[0].state,
                         city: response.data[0].city,
                         userZip: response.data[0].zipCode,
-                        userName: response.data[0].userName
+                        userName: response.data[0].userName,
+                        profileImage: response.data[0].userImage
                     });
                     console.log("state updated", this.state)
                     console.log("Profile image name", response.data[0].userImage);
@@ -100,6 +103,73 @@ class Home extends Component {
                 // alert("User credentials not valid. Please try again!");
             })
     }
+
+    //handle change of profile image
+    handleChange = (e) => {
+        const target = e.target;
+        const name = target.name;
+
+        if (name === "ProfileImage") {
+            console.log(target.files);
+            var profilePhoto = target.files[0];
+            var data = new FormData();
+            data.append('photos', profilePhoto);
+            axios.defaults.withCredentials = true;
+            axios.post(rootUrl + '/upload-file', data)
+                .then(response => {
+                    if (response.status === 200) {
+                        console.log('Profile Photo Name: ', profilePhoto.name);
+                        if (profilePhoto.name) {
+                            this.setState({
+                                profileImage: profilePhoto.name,
+                                profileImagePreview: rootUrl + "/download-file/" + profilePhoto.name
+                            })
+                        }
+
+                    }
+                });
+        }
+    }
+
+    submitProfile = (details) => {
+        console.log("Inside profile update", details);
+        const data = {
+            firstName: details.firstName,
+            lastName: details.lastName,
+            email: details.userEmail,
+            gender: details.gender,
+            description: details.aboutMe,
+            userPhone: details.userPhone,
+            state: details.state,
+            city: details.city,
+            userZip: details.zipCode,
+            userName: details.userName,
+            userImage: this.state.profileImage
+
+        }
+        //set the with credentials to true
+        axios.defaults.withCredentials = true;
+        //make a post request with the user data
+        axios.post(rootUrl + '/updateProfile', data)
+            .then(response => {
+                console.log("inside success")
+                console.log("Status Code : ", response.status);
+                if (response.status === 200) {
+                    console.log("success", response)
+                    localStorage.setItem("userName", data.userName)
+                    swal("Success", "Profile update succesfully", "success");
+                    // alert("success")
+                    // console.log(response)
+                }
+            })
+            .catch(error => {
+                console.log("In error");
+                console.log(error);
+                // alert("Update failed! Please try again")
+                swal("Oops...", "Something went wrong! Please try again later", "error");
+            })
+    }
+
     render() {
         let redirectVar = null;
         if (!localStorage.getItem('userName')) {
@@ -128,6 +198,7 @@ class Home extends Component {
                     </div>
                     <br />
                     <Formik
+                        enableReinitialize
                         initialValues={{
                             firstName: this.state.firstName,
                             lastName: this.state.lastName,
@@ -140,9 +211,9 @@ class Home extends Component {
                             userZip: this.state.userZip,
                             userName: this.state.userName
                         }}
-                        validationSchema={SignUpSchema}
+                        validationSchema={ProfileSchema}
                         onSubmit={(values, actions) => {
-                            this.submitSignup(values)
+                            this.submitProfile(values)
                             actions.setSubmitting(false);
                         }}
                     >
@@ -391,7 +462,7 @@ class Home extends Component {
                                     className="btn btn-block text-white font-weight-bold"
                                     disabled={isSubmitting}
                                 >
-                                    {isSubmitting ? "Please wait..." : "Sign Up"}
+                                    {isSubmitting ? "Please wait..." : "Update Profile"}
                                 </button>
                             </Form>
                         )}

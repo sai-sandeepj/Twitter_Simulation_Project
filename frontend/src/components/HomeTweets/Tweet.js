@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import UserImage from '../../images/user-icon.png'
 import UserActions from './UserActions'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { Dropdown } from 'react-bootstrap'
-const axios = require('axios')
+// const axios = require('axios')
 
 library.add(
     faChevronDown
@@ -110,7 +110,7 @@ class Tweet extends Component {
                         <div id='visit-tweet-card'>
                             <div className='col-2' id='user-image' ><img src={UserImage} alt='logo' /></div>
                             <div className='col-10' id='user-tweet-message'>
-                                <Link to='/user/username' id = 'tweet-fullname'><p className="font-weight-bold" id='tweet-fullname'>{this.props.tweetIndividual.userName}</p></Link>
+                                <Link to='/user/username' id='tweet-fullname'><p className="font-weight-bold" id='tweet-fullname'>{this.props.tweetIndividual.userName}</p></Link>
                                 {/* <p id='tweet-username'>@{this.props.tweetIndividual.userName}</p> */}
                                 <Dropdown>
                                     <Link>
@@ -121,7 +121,7 @@ class Tweet extends Component {
                                     <Dropdown.Menu>
                                         <Dropdown.Item> <Link onClick={() => this.showModal()}> Unfollow user</Link></Dropdown.Item>
                                     </Dropdown.Menu>
-                                </Dropdown><br/>
+                                </Dropdown><br />
                                 <p id='tweet-usermessage'>{this.props.tweetIndividual.TweetMessage}</p><br />
 
                                 <UserActions userData={this.state.user} tweetData={this.props.tweetIndividual} />
