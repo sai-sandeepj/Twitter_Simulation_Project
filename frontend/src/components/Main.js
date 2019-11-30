@@ -14,6 +14,7 @@ import OwnedLists from './Lists/OwnedLists';
 import TweetPage from './TweetPage/TweetPage';
 import ProfileLikesPage from './Profile/ProfileLikes'
 import EditProfile from './Profile/EditProfile';
+import TwitterAnalytics from './TwitterAnalytics/TwitterAnalytics'
 
 class MainRoutes extends Component {
   render() {
@@ -33,6 +34,7 @@ class MainRoutes extends Component {
         <Route path='/username/tweetid' component={TweetPage} />
         <Route path='/user/profile/likes' component={ProfileLikesPage} />
         <Route path='/user/editprofile' component={EditProfile} />
+        <Route path='/twitteranalytics' component={TwitterAnalytics} />
       </div>
     );
   }

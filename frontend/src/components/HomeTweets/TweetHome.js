@@ -10,7 +10,9 @@ class Tweets extends Component {
     constructor() {
         super()
         this.state = {
-            Tweets: []
+            tweets: null,
+            liked: null,
+            bookmarked: null
         }
 
         //     Tweets: [
@@ -55,12 +57,47 @@ class Tweets extends Component {
         }
         axios.post(rootUrl + '/getUserTweets', data)
             .then(response => {
-                console.log('response data:', response.data)
+                console.log('tweets response data:', response.data)
                 if (response.status === 200) {
+                    let tweets = response.data
+                    let liked = null
+                    let bookmarked = null
+                    axios.post(rootUrl + '/getUserBookmarkedTweets', data)
+                        .then(response => {
+                            console.log('bookmarked data:', response.data)
+                            if (response.status === 200) {
 
-                    this.setState({
-                        Tweets: response.data
-                    })
+                                bookmarked = response.data
+
+                                axios.post(rootUrl + '/getUserLikedTweets', data)
+                                    .then(response => {
+                                        console.log('liked data:', response.data)
+                                        if (response.status === 200) {
+
+                                            liked = response.data
+                                            this.setState({
+                                                tweets: tweets,
+                                                liked: liked,
+                                                bookmarked: bookmarked
+                                            })
+                                        }
+                                        else {
+                                            console.log("Didn't fetch liked tweets data")
+                                        }
+                                    }).catch((err) => {
+                                        if (err) {
+                                            swal('erroer connecting to database')
+                                        }
+                                    });
+                            }
+                            else {
+                                console.log("Didn't fetch bookmarked tweets data")
+                            }
+                        }).catch((err) => {
+                            if (err) {
+                                swal('erroer connecting to database')
+                            }
+                        });
                     console.log("Tweets", this.state.Tweets)
                 }
                 else {
@@ -68,13 +105,7 @@ class Tweets extends Component {
                 }
             }).catch((err) => {
                 if (err) {
-                    if (err.response.status === 406) {
-                        console.log("Error message", err.response.status);
-                        swal(err.response.data)
-                    }
-                    else {
-                        swal("Database connection failed. please try again later")
-                    }
+                    swal('erroer connecting to database')
                 }
 
             });
@@ -84,12 +115,15 @@ class Tweets extends Component {
     render() {
 
         let tweet = ""
-        if (this.state.Tweets.length > 0) {
-            tweet = this.state.Tweets.map((tweet, index) => {
+        if (this.state.tweets) {
+            tweet = this.state.tweets.map((tweet, index) => {
                 return (
                     <Tweet
                         key={index}
                         tweetIndividual={tweet}
+                        liked = {this.state.liked}
+                        bookmarked = {this.state.bookmarked}
+                        userDetails={this.props.userDetails}
                     // visitTweet={this.visitTweeet.bind(this)}
                     />
                 )

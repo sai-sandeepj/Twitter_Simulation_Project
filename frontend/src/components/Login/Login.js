@@ -45,6 +45,10 @@ class Login extends Component {
                     console.log("response", response.data)
                     localStorage.setItem("userName", response.data.userName)
                     localStorage.setItem("userEmail", response.data.userEmail)
+                    localStorage.setItem("userImage", response.data.userImage)
+                    localStorage.setItem("firstName", response.data.firstName)
+                    localStorage.setItem("lastName", response.data.lastName)
+                    localStorage.setItem("aboutMe", response.data.aboutMe)
                     this.setState({
                         authFlag: true
                     })

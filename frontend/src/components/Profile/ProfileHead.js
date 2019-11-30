@@ -22,6 +22,8 @@ class Profile extends Component {
             userName: localStorage.getItem("userName")
         }
         console.log("Inside get profile after component did mount", data);
+        console.log('last name', localStorage.getItem('lastName'));
+        
         //set the with credentials to true
         axios.defaults.withCredentials = true;
         //make a post request with the user data

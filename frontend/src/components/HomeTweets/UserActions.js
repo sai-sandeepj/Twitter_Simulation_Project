@@ -7,7 +7,9 @@ import { Link } from 'react-router-dom';
 import { Dropdown } from 'react-bootstrap'
 import RetweetWithCommentModal from '../Comments/RetweetWithCommentModal'
 import CommentOnTweet from '../Comments/CommentOnTweet'
-
+import axios from 'axios';
+import rootUrl from "../Config/Settings";
+import swal from "sweetalert"
 
 library.add(
     faRetweet, faChevronDown, faComment, faHeart, faBookmark, farBookmark, farHeart, faPencilAlt
@@ -25,6 +27,32 @@ class UserActions extends Component {
 
     likeTweet = () => {
         console.log('in like tweet method');
+        console.log(this.props.userDetails);
+
+        const data = {
+            tweetId: this.props.tweetData._id,
+            userName: localStorage.getItem('userName'),
+            userEmail: localStorage.getItem("userEmail"),
+            userImage: localStorage.getItem("userImage"),
+            firstName: localStorage.getItem("firstName"),
+            lastName: localStorage.getItem("lastName"),
+            aboutMe: localStorage.getItem("aboutMe")
+        }
+        console.log(data);
+        axios.post(rootUrl + '/likeATweet', data)
+            .then(response => {
+                console.log("inside success")
+                console.log("Status Code : ", response.status);
+                if (response.status === 200) {
+                    console.log(response.data);
+                }
+            })
+            .catch(error => {
+                console.log("In error");
+                console.log(error);
+                swal("Oops...", "Something went wrong! Please try again later", "error");
+
+            })
     }
 
     retweetATweet = () => {
@@ -49,11 +77,12 @@ class UserActions extends Component {
 
     render() {
 
-        let { retweets, liked, bookmarked, following } = this.props.userData
+        let { retweets, liked, bookmarked } = this.props.userData
 
         let likes = liked.includes(this.props.tweetData.id) ? '-danger' : ''
         let likeIcon = liked.includes(this.props.tweetData.id) ? faHeart : farHeart
         let likeid = 'user-actions-icon-like' + likes
+        console.log(this.props.userData);
 
         let bookmarkedIcon = bookmarked.includes(this.props.tweetData.id) ? faBookmark : farBookmark
 
@@ -72,7 +101,7 @@ class UserActions extends Component {
         return (
             <div className='row'>
                 <div className='col-3'><Link onClick={() => this.showCommentModal()}><button id='user-actions-icon-comment'><FontAwesomeIcon icon={faComment} /></button></Link></div>
-                <div className='col-3' id = 'user-retweet-option'>
+                <div className='col-3' id='user-retweet-option'>
                     <Dropdown>
                         <Link>
                             <Dropdown.Toggle id={retweetId} >
