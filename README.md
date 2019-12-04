@@ -7,7 +7,7 @@
 #### 4. Rajesh Thummala - 013829179
 #### 5. Sai Sandeep Jyothula - 013821418
 
-### Technology Stack
+### Technology Stack - [MERN]
 React JS
 Bootstrap
 Redis
