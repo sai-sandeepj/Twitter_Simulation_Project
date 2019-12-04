@@ -30,6 +30,16 @@ Express Js
 1. Install node modules using the commmand "npm install"
 2. Run the following command to start the kafka-server "node server.js"
 
+## Architecture
 
 ![](images/Architecture.jpg)
 
+## DB schema
+
+![](images/DB-SCHEMA.png)
+
+## performance graphs.png
+
+![](images/performance-graph-1.png)
+
+![](images/performance-graph-2.png)
