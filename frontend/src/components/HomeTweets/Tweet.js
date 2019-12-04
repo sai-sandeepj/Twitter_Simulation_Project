@@ -111,6 +111,24 @@ class Tweet extends Component {
             chevrondown = <Link onClick={this.unFollowUser.bind(this)}> Unfollow user</Link>
         }
 
+
+    }
+
+    render() {
+        console.log('props', this.props.tweetIndividual);
+        let chevronUnfollow = null;
+        if (this.props.tweetIndividual.userName !== localStorage.getItem('userName')) {
+            chevronUnfollow = <Dropdown>
+                <Link>
+                    <Dropdown.Toggle id='chevrondown' >
+                        <h4><button className='btn btn-' id='chevrondown'></button></h4>
+                    </Dropdown.Toggle>
+                </Link>
+                <Dropdown.Menu>
+                    <Dropdown.Item> <Link onClick={() => this.showModal()}> Unfollow user</Link></Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+        }
         return (
             <div>
                 <div className="card row">
@@ -118,6 +136,7 @@ class Tweet extends Component {
                         <div id='visit-tweet-card'>
                             <div className='col-2' id='user-image' >{profileImageData}</div>
                             <div className='col-10' id='user-tweet-message'>
+<<<<<<< HEAD
                                 <Link to={{
                                     pathname: '/user/profile',
                                     state: {
@@ -132,6 +151,12 @@ class Tweet extends Component {
                                 }} ><p id='tweet-username'> @{this.props.tweetIndividual.userName}</p></Link>
 
                                 <Dropdown >
+=======
+                                <Link to='/user/username' id='tweet-fullname'><p className="font-weight-bold" id='tweet-fullname'>{this.props.tweetIndividual.userName}</p></Link>
+                                {/* <p id='tweet-username'>@{this.props.tweetIndividual.userName}</p> */}
+                                <div id='chevrondown'>{chevronUnfollow}</div>
+                                <Dropdown>
+>>>>>>> de0a95a31ee5eb7329ddf5f066035bff31a82c6d
                                     <Link>
                                         <Dropdown.Toggle id='chevrondown-toggle' >
                                         </Dropdown.Toggle>
@@ -139,6 +164,7 @@ class Tweet extends Component {
                                     <Dropdown.Menu>
                                         <Dropdown.Item> {chevrondown}</Dropdown.Item>
                                     </Dropdown.Menu>
+<<<<<<< HEAD
                                 </Dropdown><br />
                                 <p id='tweet-usermessage'>{this.props.tweetIndividual.tweetMsg}</p><br />
                                 {tweetImageData}
@@ -153,6 +179,11 @@ class Tweet extends Component {
                                     retweetWithoutComment={this.props.retweetWithoutComment}
                                     retweetWithComment={this.props.retweetWithComment}
                                 />
+=======
+                                </Dropdown> <br />
+                                <p id='tweet-usermessage'>{this.props.tweetIndividual.tweetMsg}</p><br />
+                                <UserActions userData={this.state.user} userDetails={this.props.userDetails} tweetData={this.props.tweetIndividual} />
+>>>>>>> de0a95a31ee5eb7329ddf5f066035bff31a82c6d
                             </div>
                         </div>
                     </Link>

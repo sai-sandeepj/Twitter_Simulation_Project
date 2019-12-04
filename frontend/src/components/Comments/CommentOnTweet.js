@@ -15,14 +15,22 @@ library.add(
     faImage
 )
 class CommentOnTweet extends Component {
+<<<<<<< HEAD
     constructor() {
         super()
         this.state = {
             comment: null
+=======
+    constructor(){
+        super()
+        this.state = {
+            comment :null
+>>>>>>> de0a95a31ee5eb7329ddf5f066035bff31a82c6d
         }
     }
     onCommentChange = (e) => {
         this.setState({
+<<<<<<< HEAD
             comment: e.target.value
         })
     }
@@ -58,6 +66,36 @@ class CommentOnTweet extends Component {
         }
     }
 
+=======
+            comment:e.target.value
+        })
+    }
+    submitComment = () => {
+        const data = {
+            tweetId: this.props.tweetData._id,
+            userName: localStorage.getItem('userName'),
+            firstName: localStorage.getItem('firstName'),
+            lastName: localStorage.getItem('lastName'),
+            comment : this.state.comment,
+            commentMedia : 'something'
+        }
+        axios.post(rootUrl + '/addCommentOnTweet', data)
+            .then(response => {
+                console.log('comment:', response.data)
+                if (response.status === 200) {
+                    setTimeout(function () { alert("Hello"); }, 3000)
+                    console.log('comment successful');
+                }
+                else {
+                    console.log("comment failed")
+                }
+            }).catch((err) => {
+                if (err) {
+                    swal('erroer connecting to database')
+                }
+            });
+    }
+>>>>>>> de0a95a31ee5eb7329ddf5f066035bff31a82c6d
     render() {
         if (!this.props.commentModal) {
             return null
@@ -84,7 +122,11 @@ class CommentOnTweet extends Component {
                                 <div className="card row" id='commentingTweet'>
                                     <Link to='/username/tweetid'>
                                         <div id='visit-tweet-card'>
+<<<<<<< HEAD
                                             <div className='col-2' id='user-image' >{profileImageData}</div>
+=======
+                                            <div className='col-2' id='user-image' ><img src={UserImage} alt='logo' /></div>
+>>>>>>> de0a95a31ee5eb7329ddf5f066035bff31a82c6d
                                             <div className='col-10' id='user-tweet-message'>
                                                 <Link to='/user/username' id='none'><p className="font-weight-bold" id='tweet-fullname'>{this.props.tweetData.firstName}</p> <p className="font-weight-bold" id='tweet-fullname'>{this.props.tweetData.lastName}</p></Link>
                                                 <p id='tweet-username'> @{this.props.tweetData.userName}</p><br /><br />
@@ -96,9 +138,15 @@ class CommentOnTweet extends Component {
                                 <div className='row'>
                                     <div className='col-2' id='user-image' >{loginImageData}</div>
                                     <div className=" col-10">
+<<<<<<< HEAD
                                         <textarea onChange={this.onCommentChange.bind(this)} rows='3' id='textarea-newtweet' placeholder='comments' pattern="{1,280}"></textarea>
                                         <Link to='/user/home'><span id="images-upload" className='text-left'> <h3><FontAwesomeIcon icon={faImage} /></h3></span> </Link>
                                         <button onClick={this.submitComment.bind(this)} className='btn btn-primary btn-md' id='tweet-button'>Comment</button>
+=======
+                                        <textarea onChange = {this.onCommentChange.bind(this)} rows='3' id='textarea-newtweet' placeholder='comments' pattern="{1,280}"></textarea>
+                                        <Link to='/user/home'><span id="images-upload" className='text-left'> <h3><FontAwesomeIcon icon={faImage} /></h3></span> </Link>
+                                        <button onClick = {this.submitComment.bind(this)}className='btn btn-primary btn-md' id='tweet-button'>Comment</button>
+>>>>>>> de0a95a31ee5eb7329ddf5f066035bff31a82c6d
                                     </div>
                                 </div>
                             </form>

@@ -26,6 +26,8 @@ class NewTweet extends Component {
         }
     }
 
+        }
+    }
     TweetMsgChange = (e) => {
         this.setState({
             tweetMsg: e.target.value
@@ -55,20 +57,29 @@ class NewTweet extends Component {
                     })
             }
         }
+        console.log(this.state.tweetMsg);
+
     }
 
     newTweet = () => {
         const data = {
             userName: localStorage.getItem('userName'),
+<<<<<<< HEAD
             firstName: localStorage.getItem('firstName'),
             lastName: localStorage.getItem('lastName'),
             userImage: localStorage.getItem('userImage'),
             aboutMe: localStorage.getItem('aboutMe'),
+=======
+>>>>>>> de0a95a31ee5eb7329ddf5f066035bff31a82c6d
             tweetMsg: this.state.tweetMsg,
             tweetMedia: this.state.tweetMedia,
             isRetweet: false
         }
+<<<<<<< HEAD
         console.log("new tweet data", data);
+=======
+        console.log(data);
+>>>>>>> de0a95a31ee5eb7329ddf5f066035bff31a82c6d
         axios.post(rootUrl + '/addNewTweet', data)
             .then(response => {
                 console.log("inside success")
@@ -96,7 +107,11 @@ class NewTweet extends Component {
                 <form>
                     <div className="form-group" id='new-tweet-form-group' >
                         <textarea onChange={this.TweetMsgChange.bind(this)} className="form-control" rows='3' id='textarea-newtweet' placeholder='Whats Happening?' pattern="{1,280}"></textarea>
+<<<<<<< HEAD
                         <input type="file" name="ProfileImage" id="images-upload" className='text-left' onChange={this.handleChange} />
+=======
+                        <Link to='/user/home'><span id="images-upload" className='text-left'> <h3><FontAwesomeIcon icon={faImage} /></h3></span> </Link>
+>>>>>>> de0a95a31ee5eb7329ddf5f066035bff31a82c6d
                         <button onClick={this.newTweet.bind(this)} className='btn btn-primary btn-md float-right' id='tweet-button'><FontAwesomeIcon icon={faFeatherAlt} />Tweet</button>
                     </div>
                 </form>
