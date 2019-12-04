@@ -1,4 +1,4 @@
-# Group-2_Twitter
+# Group-2_Twitter CMPE273
 
 ### Team Members
 #### 1. Naga Abhilash Reddy Julakanti - 013816127
