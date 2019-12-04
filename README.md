@@ -31,5 +31,5 @@ Express Js
 2. Run the following command to start the kafka-server "node server.js"
 
 
-![](images/Architectre.jpg)
+![](images/Architecture.jpg)
 
