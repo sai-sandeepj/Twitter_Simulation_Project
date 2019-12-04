@@ -11,6 +11,15 @@
 
 ### Steps to run the application
 #### Frontend
+1. Navigate to frontend directory in cmd
+2. Install required dependencies using npm install
+3. Run Grubhub frontend using npm start
 #### Backend
+1. Navigate to frontend directory in cmd
+2. Install required dependencies using npm install
+3. Run calculator frontend using node index.js
 #### Kafka
+1. Install node modules using the commmand "npm install"
+2. Run the following command to start the kafka-server "node server.js"
+
 
