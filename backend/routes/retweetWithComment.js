@@ -3,43 +3,77 @@ const mongoPool = require("../configFiles/MongoConnectionPooling");
 const app = express.Router();
 
 const tweets = require("../model/tweets");
-var mongousers = require("../model/mongousers");
 
 app.post("/retweetWithComment", async (req, res) => {
-  console.log("In retweetWithComment POST");
+    console.log("In retweetWithComment POST");
+    var d = new Date().toString();
+    var l = d.split(' ').splice(0, 4).join(' ');
+    var hours = new Date().getHours();
+    var minutes = new Date().getMinutes();
+    var seconds = new Date().getSeconds();
 
-  return await tweets
-    .findOne({
-      _id: req.body.tweetId
-    })
-    .then(async result => {
-      console.log("tweet", result);
-      //res.status(200).send(JSON.stringify(result));
-
-      var retweet = new tweets({
-        isRetweet: req.body.isRetweet,
-        parentId: result._id,
+    l = l + " " + hours + " " + minutes + " " + seconds;
+    var new_retweet = new tweets({
         userName: req.body.userName,
-        tweetMsg: req.body.comment,
-        tweetDate: Date.now(),
-        tweetMedia: result.tweetMedia
-      });
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        profileImage: req.body.userImage,
+        tweetMsg: req.body.tweetMsg,
+        tweetDate: l,
+        tweetMedia: req.body.tweetMedia,
+        isRetweet: true
+    });
 
-      retweet.save(function(err, result) {
+    new_retweet.save(async (err, result) => {
         if (err) {
-          console.log("Unable to retweet", err);
-          res.status(417).send(err);
-        }
-        console.log("Retweet Success");
-        res.end("Retweet Success", result);
-        //res.status(200).send(JSON.stringify(result));
-      });
-    })
+            console.log(err);
+            res.end("could not retweet");
+        } else {
+            console.log("retweet success");
 
-    .catch(err => {
-      console.log("Could not find tweet");
-      return res.status(416).end("Could not find tweet");
-      //return res.end("could not get likes" + err);
+            var x = req.body.tweetMsg;
+            var separators = [" ", "\\+", "-", "\\(", "\\)", "\\*", "/", ":", "\\?"];
+            var tokens = x.split(new RegExp(separators.join("|"), "g"));
+            console.log("tokens", tokens);
+
+            var arr = [];
+            for (var index = 0; index < tokens.length; index++) {
+                if (tokens[index].indexOf("#") == 0) {
+                    console.log("hash", tokens[index]);
+                    arr.push(tokens[index]);
+                }
+            }
+
+            var parent = {
+                parentId: req.body.parentId,
+                parentUserName: req.body.parentUserName,
+                parentFirstName: req.body.parentFirstName,
+                parentLastName: req.body.parentLastName,
+                parentProfileImage: req.body.parentProfileImage,
+                parentTweetMsg: req.body.parentTweetMsg,
+                parentTweetMedia: req.body.parentTweetMedia
+            }
+
+            return await tweets
+                .update(
+                    { _id: result._id },
+                    {
+                        $push: {
+                            parentTweetDetails: parent,
+                            hashtags: { $each: arr }
+                        }
+                    },
+                    { new: true }
+                )
+                .then(result2 => {
+                    console.log("retweeted successfully");
+                    res.end("retweeted successfully");
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.end("could not save parent details");
+                })
+        }
     });
 });
 

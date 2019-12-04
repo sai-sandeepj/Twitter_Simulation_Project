@@ -21,13 +21,22 @@ app.post("/addNewTweet", async (req, res) => {
   }
 
   console.log("------", arr);
+  var d = new Date().toString();
+  var l = d.split(' ').splice(0, 4).join(' ');  
+  var hours = new Date().getHours();
+  var minutes = new Date().getMinutes();
+  var seconds = new Date().getSeconds();
 
+  l = l+" "+hours+" "+minutes+" "+seconds;
   var new_tweet = new tweets({
     userName: req.body.userName,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    profileImage: req.body.userImage,
     tweetMsg: req.body.tweetMsg,
-    tweetDate: Date.now(),
+    tweetDate: l,
     tweetMedia: req.body.tweetMedia,
-    isRetweet: req.body.isRetweet,
+    isRetweet: false,
     parentId: req.body.parentId,
   });
 

@@ -1,26 +1,25 @@
-var express = require("express");
-
-var app = express();
+const express = require("express");
+const mongoPool = require("../configFiles/MongoConnectionPooling");
+const app = express.Router();
 
 const tweets = require("../model/tweets");
 
-app.post("/searchByHashtag", async (req, res) => {
-  console.log("In restaurantsbyItemCuisine");
+app.post("/searchByHashTag", async(req,res)=>{
+    console.log("In searchByHashTag post");
 
-  var topic = req.body.topic;
-
-  return await tweets
-    .find({
-      hashtags: topic
-    })
-    .then(result => {
-      console.log("result", result);
-      return res.status(200).end("" + result);
-    })
-    .catch(err => {
-      console.log("error in searching topics");
-      return res.status(410).end("error in searching topics");
-    });
+    return await tweets
+        //.find({hashtags: req.body.hashTag})
+        .find({hashtags: { "$regex": req.body.hashTag, "$options": "i" }})
+        .select()
+        .then(result =>{
+            console.log("got hashtag tweets");
+            res.end(JSON.stringify(result));
+        })
+        .catch(err =>{
+            console.log(err);
+            res.end("could nt get hastag tweets");
+        })
+    
 });
 
 module.exports = app;
