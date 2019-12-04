@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faBars, faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope, faBookmark, faChartBar } from '@fortawesome/free-regular-svg-icons'
 import { Redirect } from 'react-router';
+import rootUrl from "../Config/Settings";
 
 library.add(
   faHome,
@@ -27,8 +28,15 @@ class SidePanel extends Component {
   }
   render() {
     let redirectVar = null;
+    let profileImageData = null;
     if (!localStorage.getItem('userName')) {
       redirectVar = <Redirect to='/' />
+    }
+    if (localStorage.getItem('userImage')) {
+      profileImageData = <img src={rootUrl + "/download-file/" + localStorage.getItem('userImage')} alt="logo" />
+    }
+    else {
+      profileImageData = <FontAwesomeIcon icon={faUserCircle} />
     }
     return (
       <div>
@@ -45,9 +53,9 @@ class SidePanel extends Component {
 
           <a href='/user/bookmarks'><h5 id="stayleft"><FontAwesomeIcon icon={faBookmark} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5><h5 className='d-none d-lg-block d-print-block' id="stayleftall">Bookmarks</h5></a>
 
-          <a href='/user/profile'><h5 id="stayleft"><FontAwesomeIcon icon={faUserCircle} /> &nbsp; &nbsp; </h5><h5 className='d-none d-lg-block d-print-block' id="stayleftall">Profile</h5></a>
+          <a href='/user/profile'><h5 id="stayleft"><div className='col-1' id='user-image-profile' >{profileImageData}</div> &nbsp; &nbsp; </h5><h5 className='d-none d-lg-block d-print-block' id="stayleftall">{localStorage.getItem('firstName')} {localStorage.getItem('lastName')}</h5></a>
 
-          <a href='/user/analytics'><h5 id="stayleft"><FontAwesomeIcon icon={faChartBar} /> &nbsp; &nbsp; </h5> <h5 className='d-none d-lg-block d-print-block' id="stayleftall">Analytics</h5></a>
+          <a href='/twitteranalytics'><h5 id="stayleft"><FontAwesomeIcon icon={faChartBar} /> &nbsp; &nbsp; </h5> <h5 className='d-none d-lg-block d-print-block' id="stayleftall">Analytics</h5></a>
 
           <a href='/' onClick={this.handleLogout}><h5 id="stayleft" ><FontAwesomeIcon icon={faSignOutAlt} /> &nbsp; &nbsp;</h5><h5 className='d-none d-lg-block d-print-block' id="stayleftall">Logout</h5></a>
         </div>

@@ -7,6 +7,7 @@ import swal from "sweetalert";
 import twitterlogo from "../../images/twitterlogo.png";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import jwtDecode from "jwt-decode";
 
 const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -29,6 +30,10 @@ class Login extends Component {
     }
 
     submitLogin = (details) => {
+
+        const authToken = "JWT " + localStorage.getItem("token");
+
+        const jwt = localStorage.getItem("token");
         console.log();
         const data = {
             userEmail: details.email,
@@ -43,8 +48,15 @@ class Login extends Component {
                 console.log("Status Code : ", response.status);
                 if (response.status === 200) {
                     console.log("response", response.data)
-                    localStorage.setItem("userName", response.data.userName)
-                    localStorage.setItem("userEmail", response.data.userEmail)
+                    localStorage.setItem('token', response.data);
+                    localStorage.setItem('authToken', `JWT ${response.data}`);
+                    const decoded = jwtDecode(response.data);
+                    localStorage.setItem("userName", decoded.userName)
+                    localStorage.setItem("userEmail", decoded.userEmail)
+                    localStorage.setItem("userImage", decoded.userImage)
+                    localStorage.setItem("firstName", decoded.firstName)
+                    localStorage.setItem("lastName", decoded.lastName)
+                    localStorage.setItem("aboutMe", decoded.aboutMe)
                     this.setState({
                         authFlag: true
                     })

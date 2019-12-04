@@ -28,3 +28,18 @@ a:hover
      text-decoration:none; 
      cursor:pointer;  
 }
+
+
+#user-image-profile{
+  float: left;
+  /* width: px; */
+  padding: 0px;
+  margin-left: 0px;
+}
+
+#user-image-profile img{
+width: 30px;
+height: 30px;
+border-radius: 50%;
+float: left;
+}

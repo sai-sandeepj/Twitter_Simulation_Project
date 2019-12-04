@@ -73,25 +73,25 @@ class Home extends Component {
                 console.log("inside success")
                 console.log("Status Code : ", response.status);
                 if (response.status === 200) {
-                    console.log("response", response.data[0])
+                    console.log("response", response.data[0][0])
                     this.setState({
-                        firstName: response.data[0].firstName,
-                        lastName: response.data[0].lastName,
-                        email: response.data[0].userEmail,
-                        gender: response.data[0].gender,
-                        description: response.data[0].aboutMe,
-                        userPhone: response.data[0].userPhone,
-                        state: response.data[0].state,
-                        city: response.data[0].city,
-                        userZip: response.data[0].zipCode,
-                        userName: response.data[0].userName,
-                        profileImage: response.data[0].userImage
+                        firstName: response.data[0][0].firstName,
+                        lastName: response.data[0][0].lastName,
+                        email: response.data[0][0].userEmail,
+                        gender: response.data[0][0].gender,
+                        description: response.data[0][0].aboutMe,
+                        userPhone: response.data[0][0].userPhone,
+                        state: response.data[0][0].state,
+                        city: response.data[0][0].city,
+                        userZip: response.data[0][0].zipCode,
+                        userName: response.data[0][0].userName,
+                        profileImage: response.data[0][0].userImage
                     });
                     console.log("state updated", this.state)
-                    console.log("Profile image name", response.data[0].userImage);
-                    if (response.data[0].userImage) {
+                    console.log("Profile image name", response.data[0][0].userImage);
+                    if (response.data[0][0].userImage) {
                         this.setState({
-                            profileImagePreview: rootUrl + "/download-file/" + response.data[0].userImage
+                            profileImagePreview: rootUrl + "/download-file/" + response.data[0][0].userImage
                         })
                     }
                 }

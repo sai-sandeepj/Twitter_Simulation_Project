@@ -17,7 +17,7 @@ class Home extends Component {
             redirectVar = <Redirect to='/' />
         }
         return (
-            <div class='row'>
+            <div>
                 {redirectVar}
                 <div className='row'>
                     <div className='col-sm-none col-md-1 col-lg-1 col-xl-1'>

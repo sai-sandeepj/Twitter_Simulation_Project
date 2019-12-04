@@ -12,7 +12,7 @@ class Home extends Component {
             redirectVar = <Redirect to='/' />
         }
         return (
-            <div className='row'>
+            <div>
                 {redirectVar}
                 <div className='row' id='font-styling'>
                     <div className='col-sm-none col-md-1 col-lg-1 col-xl-1'>

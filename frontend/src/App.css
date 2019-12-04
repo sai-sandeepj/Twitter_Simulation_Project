@@ -85,3 +85,12 @@
 #desc{
   margin: 5px;
 }
+
+#card-img-top{
+  height: 100px;
+  width: 150px;
+}
+
+#member{
+  visibility: hidden;
+}

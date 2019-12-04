@@ -10,87 +10,246 @@ class Tweets extends Component {
     constructor() {
         super()
         this.state = {
-            Tweets: []
+            tweets: null,
+            liked: null,
+            retweets: null,
+            userDetails: {
+                userName: localStorage.getItem('userName'),
+                firstName: localStorage.getItem('firstName'),
+                lastName: localStorage.getItem('lastName'),
+                userImage: localStorage.getItem('userImage'),
+                userEmail: localStorage.getItem('userEmail'),
+                aboutMe: localStorage.getItem('aboutMe')
+            }
         }
-
-        //     Tweets: [
-        //         {
-        //             id: '1',
-        //             userName: 'User1',
-        //             FullName: 'Userone',
-        //             TweetMessage: 'This is tweet message. This is tweet message This is tweet message This is tweet message This is tweet message. This is tweet message. This is tweet message This is tweet message This is tweet message This is tweet message'
-        //         },
-        //         {
-        //             id: '2',
-        //             userName: 'User2',
-        //             FullName: 'Usertwo',
-        //             TweetMessage: 'this is tweet message'
-        //         },
-        //         {
-        //             id: '3',
-        //             userName: 'User3',
-        //             FullName: 'Userthree',
-        //             TweetMessage: 'this is tweet message'
-        //         },
-        //         {
-        //             id: '4',
-        //             userName: 'User4',
-        //             FullName: 'Userfour',
-        //             TweetMessage: 'this is tweet message'
-        //         },
-        //         {
-        //             id: '5',
-        //             userName: 'User5',
-        //             FullName: 'Userfive',
-        //             TweetMessage: 'this is tweet message'
-        //         },
-        //     ]
-        // }
     }
 
-    componentDidMount = () => {
+    componentWillMount = () => {
         let userName = localStorage.getItem('userName')
         const data = {
             userName: userName
         }
-        axios.post(rootUrl + '/getUserTweets', data)
+        axios.post(rootUrl + '/getAllTweetsFollowing', data)
             .then(response => {
-                console.log('response data:', response.data)
+                console.log('tweets response data:', response.data)
                 if (response.status === 200) {
+                    let tweets = response.data
+                    axios.post(rootUrl + '/getUserLikedTweetIds', data)
+                        .then(response => {
+                            console.log('liked data:', response.data)
+                            if (response.status === 200) {
 
-                    this.setState({
-                        Tweets: response.data
-                    })
-                    console.log("Tweets", this.state.Tweets)
+                                let liked = response.data
+                                axios.post(rootUrl + '/getUserRetweetIds', data)
+                                    .then(response => {
+                                        console.log('retweet data:', response.data)
+                                        if (response.status === 200) {
+
+                                            let retweets = response.data
+                                            this.setState({
+                                                liked: liked,
+                                                tweets: tweets,
+                                                retweets: retweets
+                                            })
+                                        }
+                                        else {
+                                            console.log("Didn't fetch retweets data")
+                                        }
+                                    }).catch((err) => {
+                                        if (err) {
+                                            swal('erroer connecting to database')
+                                        }
+                                    });
+                            }
+                            else {
+                                console.log("Didn't fetch liked tweets data")
+                            }
+                        }).catch((err) => {
+                            if (err) {
+                                swal('erroer connecting to database')
+                            }
+                        });
+
+                    console.log("Tweets", this.state.tweets)
                 }
                 else {
                     console.log("Didn't fetch tweets data")
                 }
             }).catch((err) => {
                 if (err) {
-                    if (err.response.status === 406) {
-                        console.log("Error message", err.response.status);
-                        swal(err.response.data)
-                    }
-                    else {
-                        swal("Database connection failed. please try again later")
-                    }
+                    swal('erroer connecting to database')
                 }
-
             });
     }
 
+    likeTweet = (tweetId) => {
+        console.log('in like tweet method');
+        let data = {
+            tweetId: tweetId,
+            userName: localStorage.getItem('userName'),
+            userEmail: localStorage.getItem("userEmail"),
+            userImage: localStorage.getItem("userImage"),
+            firstName: localStorage.getItem("firstName"),
+            lastName: localStorage.getItem("lastName"),
+            aboutMe: localStorage.getItem("aboutMe")
+        }
+        console.log(data);
+        axios.post(rootUrl + '/likeATweet', data)
+            .then(response => {
+                console.log("inside success")
+                console.log("Status Code : ", response.status);
+                if (response.status === 200) {
+                    console.log(response.data);
+                    data = {
+                        userName: localStorage.getItem('userName')
+                    }
+                    axios.post(rootUrl + '/getUserLikedTweetIds', data)
+                        .then(response => {
+                            console.log('liked data:', response.data)
+                            if (response.status === 200) {
 
+                                let liked = response.data
+                                axios.post(rootUrl + '/getAllTweetsFollowing', data)
+                                    .then(response => {
+                                        console.log('tweets response data:', response.data)
+                                        if (response.status === 200) {
+                                            let tweets = response.data
+                                            this.setState({
+                                                liked: liked,
+                                                tweets: tweets
+                                            })
+                                        }
+                                        else {
+                                            console.log("Didn't fetch tweets data")
+                                        }
+                                    }).catch((err) => {
+                                        if (err) {
+                                            swal('erroer connecting to database')
+                                        }
+                                    });
+                            }
+                            else {
+                                console.log("Didn't fetch liked tweets data")
+                            }
+                        }).catch((err) => {
+                            if (err) {
+                                swal('erroer connecting to database')
+                            }
+                        });
+                }
+            })
+            .catch(error => {
+                console.log("In error");
+                console.log(error);
+                swal("Oops...", "Something went wrong! Please try again later", "error");
+
+            })
+    }
+
+    retweetWithoutComment = (tweetId) => {
+        console.log('in retweet without comment method');
+        if (localStorage.getItem('userName')) {
+            let data = {
+                tweetId: tweetId,
+                userName: localStorage.getItem('userName'),
+                userEmail: localStorage.getItem("userEmail"),
+                userImage: localStorage.getItem("userImage"),
+                firstName: localStorage.getItem("firstName"),
+                lastName: localStorage.getItem("lastName"),
+                aboutMe: localStorage.getItem("aboutMe")
+            }
+            console.log(data);
+            axios.post(rootUrl + '/retweetWithoutComment', data)
+                .then(response => {
+                    console.log("inside success")
+                    console.log("Status Code : ", response.status);
+                    if (response.status === 200) {
+                        console.log(response.data);
+                        data = {
+                            userName: localStorage.getItem('userName')
+                        }
+                        axios.post(rootUrl + '/getUserRetweetIds', data)
+                            .then(response => {
+                                console.log('retweets data:', response.data)
+                                if (response.status === 200) {
+
+                                    let retweets = response.data
+                                    axios.post(rootUrl + '/getAllTweetsFollowing', data)
+                                        .then(response => {
+                                            console.log('tweets response data:', response.data)
+                                            if (response.status === 200) {
+                                                let tweets = response.data
+                                                this.setState({
+                                                    retweets: retweets,
+                                                    tweets: tweets
+                                                })
+                                            }
+                                            else {
+                                                console.log("Didn't fetch tweets data")
+                                            }
+                                        }).catch((err) => {
+                                            if (err) {
+                                                swal('erroer connecting to database')
+                                            }
+                                        });
+                                }
+                                else {
+                                    console.log("Didn't fetch retweets data")
+                                }
+                            }).catch((err) => {
+                                if (err) {
+                                    swal('erroer connecting to database')
+                                }
+                            });
+                    }
+                })
+                .catch(error => {
+                    console.log("In error");
+                    swal("Oops...", "Something went wrong! Please try again later", "error");
+
+                })
+        }
+    }
+    retweetWithComment = () => {
+        const data = {
+            userName: localStorage.getItem('userName')
+        }
+        axios.post(rootUrl + '/getAllTweetsFollowing', data)
+            .then(response => {
+                console.log('tweets response data:', response.data)
+                if (response.status === 200) {
+                    let tweets = response.data
+                    this.setState({
+                        tweets: tweets
+                    })
+                }
+                else {
+                    console.log("Didn't fetch tweets data")
+                }
+            }).catch((err) => {
+                if (err) {
+                    swal('erroer connecting to database')
+                }
+            });
+    }
     render() {
 
         let tweet = ""
-        if (this.state.Tweets.length > 0) {
-            tweet = this.state.Tweets.map((tweet, index) => {
+        console.log(this.state.tweets);
+
+        if (this.state.tweets) {
+            tweet = this.state.tweets.map((tweet, index) => {
                 return (
                     <Tweet
                         key={index}
                         tweetIndividual={tweet}
-                    // visitTweet={this.visitTweeet.bind(this)}
+                        onDataLoaded={this.forceUpdate}
+                        liked={this.state.liked}
+                        retweets={this.state.retweets}
+                        likeTweet={this.likeTweet.bind(this)}
+                        retweetWithComment={this.retweetWithComment.bind(this)}
+                        retweetWithoutComment={this.retweetWithoutComment.bind(this)}
+                        userDetails={this.state.userDetails}
                     />
                 )
             })

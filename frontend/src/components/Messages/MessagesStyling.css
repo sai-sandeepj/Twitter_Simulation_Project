@@ -9,3 +9,64 @@
 #messages-total{
     margin-top: 30px;
 }
+
+#visit-tweet-card-messages{
+    padding: 10px;
+}
+
+.message.from-me .username {
+  display: none;
+}
+
+.message.from-me {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+.message.from-me .message-body {
+  background-color: #1DA1F2;
+  color: white;
+  padding: 7px;
+  border-radius: 20px;
+}
+
+
+.message.not-me .username {
+  display: none;
+}
+
+.message.not-me {
+  display: flex;
+  margin-top: 5px;
+}
+
+
+.message.not-me .message-body {
+  background-color: #a9a9a9;
+  color: white;
+  padding: 7px;
+  border-radius: 20px;
+}
+
+#containerElement{
+    position: 'relative';
+    height: '800px';
+    overflow: 'scroll';
+    margin-bottom: '50px';
+}
+
+#align-bottom{
+  position: relative;
+  margin-top: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+  vertical-align: bottom;
+}
+
+#align-bottom input[type="text"] {
+    float: left;
+    /* max-width: 80%; */
+    float:center;
+    margin:auto;
+}

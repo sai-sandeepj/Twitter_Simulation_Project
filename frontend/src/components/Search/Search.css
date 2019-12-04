@@ -12,3 +12,7 @@
 #search-button{
     border-radius: 20px 20px 20px 20px;
 }
+
+#searchresults{
+    margin-top: 10px;
+}

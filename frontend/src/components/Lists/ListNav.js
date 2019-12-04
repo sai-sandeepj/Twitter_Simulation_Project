@@ -15,10 +15,10 @@ class Home extends Component {
                 <div className='row '>
                     <div className='col-2 text-left' >
                         <h4 className='font-weight-bold'>Lists</h4>
-                        <h6 className='text-secondary'>@test_username</h6>
+                        <h6 className='text-secondary'>@{localStorage.getItem("userName")}</h6>
                     </div>
                     <div className='col-10 float-right'>
-                        <a href='/lists/create'><h4 className="float-right"><FontAwesomeIcon icon={faCalendarPlus} /></h4> </a>
+                        <a href='/user/lists/create'><h4 className="float-right"><FontAwesomeIcon icon={faCalendarPlus} /></h4> </a>
                     </div>
                 </div>
                 <ul className="nav nav-tabs">
