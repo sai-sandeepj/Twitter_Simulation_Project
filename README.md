@@ -27,8 +27,9 @@ Express Js
 2. Install required dependencies using npm install
 3. Run twitter backend using node index.js
 #### Kafka
-1. Install node modules using the commmand "npm install"
-2. Run the following command to start the kafka-server "node server.js"
+1. Navigate to kafka-backend directory in cmd 
+2. Install node modules using the commmand "npm install"
+3. Run the following command to start the kafka-server "node server.js"
 
 ## Architecture
 
