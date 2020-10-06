@@ -1,23 +1,20 @@
-# Group-2_Twitter 
-
-## CMPE273 [Fall'19]
+# Twitter WebApp Prototype
 
 ### Team Members
-#### 1. Naga Abhilash Reddy Julakanti - 013816127
-#### 2. Nidhi Tattur Aravinda Kumar - 013845494
-#### 3. Nithin Gollanapally - 013820599
-#### 4. Rajesh Thummala - 013829179
-#### 5. Sai Sandeep Jyothula - 013821418
+#### 1. Sai Sandeep Jyothula
+#### 2. Naga Abhilash Reddy Julakanti
+#### 3. Nidhi Tattur Aravinda Kumar
+#### 4. Nithin Gollanapally
+#### 5. Rajesh Thummala
 
 ### Technology Stack - [MERN]
-React JS
-Bootstrap
+MongoDB
+ExpressJS
+ReactJS
+Node.js
+MySQL
 Redis
 Apache Kafka
-Mongo DB
-MySQL
-Node Js
-Express Js
 
 ### Steps to run the application
 #### Frontend
@@ -33,15 +30,22 @@ Express Js
 2. Install node modules using the commmand "npm install"
 3. Run the following command to start the kafka-server "node server.js"
 
-## Architecture
+### Application Screenshots
+#### 1. Login Page
+![](images/login_page.png)
 
-![](images/Architecture.jpg)
+#### 2. Profile Page
+![](images/profile.png)
 
-## DB schema
+#### 3. Home page
+![](images/home1.png)
+![](images/home2.png)
 
-![](images/DB-SCHEMA.png)
+### Architecture
 
-## performance graphs.png
+![](images/architecture.png)
+
+### performance graphs.png
 
 ![](images/performance-graph-1.png)
 
