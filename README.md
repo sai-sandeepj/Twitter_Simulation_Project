@@ -55,7 +55,7 @@ $ node server.js
 
 ---
 
-### performance graphs.png
+### Performance graphs (JMeter Tests)
 
 ![](images/performance-graph-1.png)
 
