@@ -8,12 +8,12 @@
 > 5. Rajesh Thummala
 
 ### Technology Stack - [MERN]
-MongoDB
-ExpressJS
-ReactJS
-Node.js
-MySQL
-Redis
+MongoDB |
+ExpressJS |
+ReactJS |
+Node.js |
+MySQL |
+Redis |
 Apache Kafka
 
 ### Steps to run the application
