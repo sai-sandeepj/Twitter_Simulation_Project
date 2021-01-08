@@ -51,7 +51,7 @@ $ node server.js
 
 ### Architecture
 
-![](images/architecture.png)
+![](images/architecture.jpg)
 
 ---
 
