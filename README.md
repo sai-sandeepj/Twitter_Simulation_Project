@@ -1,4 +1,4 @@
-# Twitter WebApp Prototype
+# Twitter Simulation
 
 ### Team Members
 > 1. Sai Sandeep Jyothula
